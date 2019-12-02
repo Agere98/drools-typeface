@@ -6,9 +6,10 @@ import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.utils.ClassLoaderUtil;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -21,30 +22,34 @@ public class Main {
         KieSession session = kieBase.newKieSession();
 
         Gson gson = new Gson();
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        JsonReader reader = new JsonReader(new InputStreamReader(classloader.getResourceAsStream("/typeface_questions.json")));
+
+        InputStream is = Main.class.getResourceAsStream("/typeface_questions.json");
+        JsonReader reader = new JsonReader(new BufferedReader(new InputStreamReader(is)));
+
         Question[] questions = gson.fromJson(reader, Question[].class);
          for (Question q : questions) {
-               System.out.println(q);
+             session.insert(q);
          }
 
-        session.fireAllRules();
+        session.fireUntilHalt();
         session.dispose();
     }
 
-    public class Question {
+    public static class Question {
         public String content;
         public String subject;
         public String[] possibleAnswers;
         public String type;
-        public String answer;
+
+        public String getSubject() {
+            return subject;
+        }
 
         public Question(String cont, String subj) {
             content = cont;
             subject = subj;
             possibleAnswers = new String[]{"yes", "no"};
             type = "single";
-            answer = "";
         }
 
         public Question(String cont, String subj, String[] posans) {
@@ -52,7 +57,6 @@ public class Main {
             subject = subj;
             possibleAnswers = posans;
             type = "single";
-            answer = "";
         }
 
         public Question(String cont, String subj, String[] posans, String tp) {
@@ -60,7 +64,24 @@ public class Main {
             subject = subj;
             possibleAnswers = posans;
             type = tp;
-            answer = "";
+        }
+
+        @Override
+        public String toString() {
+            return content;
+        }
+    }
+    public static class Answer {
+        public String subject;
+        public String answer;
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public Answer(String subj, String ans) {
+            subject = subj;
+            answer = ans;
         }
     }
 
