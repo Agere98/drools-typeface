@@ -1,0 +1,203 @@
+[
+  {
+    "content": "What kind of project you need typeface for?",
+    "subject": "kind of project",
+    "possibleAnswers": [
+      "book",
+      "newspaper",
+      "infographic"
+    ]
+  },
+  {
+    "content": "Are you in completely doubt?",
+    "subject": "in doubt",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "A champion in usability perhaps?",
+    "subject": "champion in usability",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Everybody loves Garamond",
+    "subject": "loves Garamond",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "But perhaps one would want a larger eye?",
+    "subject": "wants a larger eye",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "So you want a Sans Serif. Is that the case?",
+    "subject": "wants sans serif",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "What is your opinion of Eric Gill?",
+    "subject": "opinion of Eriv Gill",
+    "possibleAnswers": [
+      "good",
+      "bad"
+    ]
+  },
+  {
+    "content": "Humanistic forms please your eye?",
+    "subject": "likes humanistic forms",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Okay to a question of food",
+    "subject": "preferred cheese",
+    "possibleAnswers": [
+      "gouda",
+      "emmental"
+    ]
+  },
+  {
+    "content": "We all like something condensed, yes?",
+    "subject": "likes condensed",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Got a lot of tables, have you?",
+    "subject": "got a lot of tables",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "You cried when watching Terminator?",
+    "subject": "cried watching Terminator",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Where are you going to use typeface?",
+    "subject": "where in newspaper",
+    "possibleAnswers": [
+      "text face",
+      "display",
+      "combined"
+    ]
+  },
+  {
+    "content": "Are people call you boring from time to time?",
+    "subject": "is called boring",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "How about something heavily used?",
+    "subject": "heavily used",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "How about something award winning?",
+    "subject": "awward winning",
+    "possibleAnswers": [
+      "good",
+      "bad"
+    ]
+  },
+  {
+    "content": "Think Mr. Spiekermann is mostly right?",
+    "subject": "thinks Spiekermann is right",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "The Netherlands is nice, right?",
+    "subject": "Netherlands is nice",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Get out of my program",
+    "subject": "",
+    "possibleAnswers": [
+    ]
+  },
+  {
+    "content": "Mmm, spiky Serifs are nice",
+    "subject": "",
+    "possibleAnswers": [
+      "yes"
+    ]
+  },
+  {
+    "content": "Do you like it traditional?",
+    "subject": "likes it traditional",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "It's okay to you it's swiss?",
+    "subject": "ok with swiss",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Okay, to a question of age",
+    "subject": "preferred age",
+    "possibleAnswers": [
+      "old",
+      "new"
+    ]
+  },
+  {
+    "content": "Something modern, yet plainspoken?",
+    "subject": "modern yet plainspoken",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Not afraid to be asked if you live in the nineties?",
+    "subject": "pretend to live in nineties",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  }
+]
+
+

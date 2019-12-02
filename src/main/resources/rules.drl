@@ -1,292 +1,262 @@
 package pl.put.poznan;
 
-global java.util.Set controlSet;
-
-declare Question
-    content: String
-    subj: String
-    type: String
-    possibleAnswers: String[]
-    answer: String
-end
+import pl.put.poznan.Main.Question
 
 declare Font
     name: String
 end
 
-rule "init"
-    when
-    then
-        //Question( content, subj, possibleAnswers = {"yes", "no"}, type = "single")
-        insert(new Question("What kind of project you need typeface for?","kind of project",{"book", "newspaper", "infographic"}))
-        insert(new Question("Are you in completely doubt?", "in doubt"))
-        insert(new Question("A champion in usability perhaps?", "campion in usability"))
-        insert(new Question("Everybody loves Garamond", "loves Garamond"))
-        insert(new Question("But perhaps one would want a larger eye?", "wants a larger eye"))
-        insert(new Question("So you want a Sans Serif. Is that the case?", "wants sans serif"))
-        insert(new Question("What is your opinion of Eric Gill?", "opinion of Eriv Gill", {"good","bad"}))
-        insert(new Question("Humanistic forms please your eye?", "likes humanistic forms"))
-        insert(new Question("Okay to a question of food", "preffered cheese", {"gouda", "emmental"}))
-        insert(new Question("We all like something condensed, yes?", "likes condensed"))
-        insert(new Question("Got a lot of tables, have you?", "got a lot of tables"))
-        insert(new Question("You cried when watching Terminator?", "cried watching Terminator"))
-        insert(new Question("Where are you going to use typeface?", "where in newspaper", {"text face", "display", "combined"}))
-        insert(new Question("Are people call you boring from time to time?", "is called boring"))
-        insert(new Question("How about something heavily used?", "heavily used"))
-        insert(new Question("How about something award winning?", "awward winning", {"good", "bad"}))
-        insert(new Question("Think Mr. Spiekermann is mostly right?", "thinks Spiekermann is right"))
-        insert(new Question("The Netherlands is nice, right?", "Netherlands is nice"))
-        insert(new Question("Get out of my program!", "", {})) // może przesada
-        insert(new Question("Mmm, spiky Serifs are nice", "", {"yes"}))
-        insert(new Question("Do you like it traditional?", "likes it traditional"))
-        insert(new Question("It's okay to you it's swiss?", "ok with swiss"))
-        insert(new Question("Okay, to a question of age", "preffered age", {"old", "new"}))
-        insert(new Question("Something modern, yet plainspoken?", "modern yet plainspoken"))
-        insert(new Question("Not afraid to be askied if you live in the nineties?", "pretend to live in nineties"))
-end
+//rule "init"
+//    when
+//    then
+//end
 
 rule "when to choose Syntax"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "no")
-       Question(subj = "sans serif", answer = "no")
-       Question(subj = "opinion of Eric Gill", answer = "bad")
-       Question(subj = "likes humanistic forms", answer = "yes")
-       Question(subj = "preffered cheese", answer = "emmental")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "no")
+       Question(subject == "sans serif", answer == "no")
+       Question(subject == "opinion of Eric Gill", answer == "bad")
+       Question(subject == "likes humanistic forms", answer == "yes")
+       Question(subject == "preffered cheese", answer == "emmental")
     then
        System.out.println("Best typeface for you is Syntax");
-       insert(new Font("Syntax"))
+       insert(new Font("Syntax"));
 end
 
 rule "when to choose FF Scala"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "no")
-       Question(subj = "sans serif", answer = "no")
-       Question(subj = "opinion of Eric Gill", answer = "bad")
-       Question(subj = "likes humanistic forms", answer = "yes")
-       Question(subj = "preffered cheese", answer = "gouda")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "no")
+       Question(subject == "sans serif", answer == "no")
+       Question(subject == "opinion of Eric Gill", answer == "bad")
+       Question(subject == "likes humanistic forms", answer == "yes")
+       Question(subject == "preffered cheese", answer == "gouda")
     then
        System.out.println("Best typeface for you is FF Scala");
-       insert(new Font("FF Scala"))
+       insert(new Font("FF Scala"));
 end
 
 rule "when to choose Baskerville"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "no")
-       Question(subj = "sans serif", answer = "no")
-       Question(subj = "opinion of Eric Gill", answer = "bad")
-       Question(subj = "likes humanistic forms", answer = "no")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "no")
+       Question(subject == "sans serif", answer == "no")
+       Question(subject == "opinion of Eric Gill", answer == "bad")
+       Question(subject == "likes humanistic forms", answer == "no")
     then
        System.out.println("Best typeface for you is Baskerville");
-       insert(new Font("Baskerville"))
+       insert(new Font("Baskerville"));
 end
 
 rule "when to choose Joanna"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "no")
-       Question(subj = "sans serif", answer = "no")
-       Question(subj = "opinion of Eric Gill", answer = "good")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "no")
+       Question(subject == "sans serif", answer == "no")
+       Question(subject == "opinion of Eric Gill", answer == "good")
     then
        System.out.println("Best typeface for you is Joanna");
-       insert(new Font("Joanna"))
+       insert(new Font("Joanna"));
 end
 
 rule "when to choose Optima"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "yes")
-       Question(subj = "want larger eye", answer = "yes")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "yes")
+       Question(subject == "want larger eye", answer == "yes")
     then
        System.out.println("Best typeface for you is Optima");
-       insert(new Font("Optima"))
+       insert(new Font("Optima"));
 end
 
 rule "when to choose Sabon"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "yes")
-       Question(subj = "want larger eye", answer = "yes")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "yes")
+       Question(subject == "want larger eye", answer == "yes")
     then
        System.out.println("Best typeface for you is Sabon");
-       insert(new Font("Sabon"))
+       insert(new Font("Sabon"));
 end
 
 rule "when to choose Garamond"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "no")
-       Question(subj = "loves Garamond", answer = "yes")
-       Question(subj = "want larger eye", answer = "yes")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "no")
+       Question(subject == "loves Garamond", answer == "yes")
+       Question(subject == "want larger eye", answer == "yes")
     then
        System.out.println("Best typeface for you is Garamond");
-       insert(new Font("Garamond"))
+       insert(new Font("Garamond"));
 end
 
 rule "when to choose Minion"
     when
-       Question(subj = "in doubt", answer = "no")
-       Question(subj = "champion in usablity", answer = "yes")
+       Question(subject == "in doubt", answer == "no")
+       Question(subject == "champion in usablity", answer == "yes")
     then
        System.out.println("Best typeface for you is Minion");
-       insert(new Font("Minion"))
+       insert(new Font("Minion"));
 end
 
 rule "when to choose Caslon"
     when
-       Question(subj = "in doubt", answer = "yes")
+       Question(subject == "in doubt", answer == "yes")
     then
        System.out.println("Best typeface for you is Caslon");
-       insert(new Font("Caslon"))
+       insert(new Font("Caslon"));
 end
 
 rule "when to choose FF DIN"
     when
-       Question(subj = "likes condensed", answer = "no")
-       Question(subj = "got a lot of tables", answer = "no")
-       Question(subj = "cried watching Terminator", answer = "no")
+       Question(subject == "likes condensed", answer == "no")
+       Question(subject == "got a lot of tables", answer == "no")
+       Question(subject == "cried watching Terminator", answer == "no")
     then
        System.out.println("Best typeface for you is FF Din");
-       insert(new Font("FF DIN"))
+       insert(new Font("FF DIN"));
 end
 
 rule "when to choose OCR"
     when
-       Question(subj = "likes condensed", answer = "no")
-       Question(subj = "got a lot of tables", answer = "no")
-       Question(subj = "cried watching Terminator", answer = "yes")
+       Question(subject == "likes condensed", answer == "no")
+       Question(subject == "got a lot of tables", answer == "no")
+       Question(subject == "cried watching Terminator", answer == "yes")
     then
        System.out.println("Best typeface for you is OCR");
-       insert(new Font("OCR"))
+       insert(new Font("OCR"));
 end
 
 rule "when to choose Letter Gothic"
     when
-       Question(subj = "likes condensed", answer = "no")
-       Question(subj = "got a lot of tables", answer = "yes")
+       Question(subject == "likes condensed", answer == "no")
+       Question(subject == "got a lot of tables", answer == "yes")
     then
        System.out.println("Best typeface for you is Letter Gothic");
-       insert(new Font("Letter Gothic"))
+       insert(new Font("Letter Gothic"));
 end
 
 rule "when to choose Univers"
     when
-       Question(subj = "likes condensed", answer = "yes")
+       Question(subject == "likes condensed", answer == "yes")
     then
        System.out.println("Best typeface for you is Univers");
-       insert(new Font("Univers"))
+       insert(new Font("Univers"));
 end
 
 rule "when to choose Proforma"
     when
-       Question(subj = "where in newspaper", answer = "text face")
-       Question(subj = "person is called boring", answer = "no")
-       Question(subj = "heavily used", answer = "no")
-       Question(subj = "awward winning", answer = "good")
+       Question(subject == "where in newspaper", answer == "text face")
+       Question(subject == "person is called boring", answer == "no")
+       Question(subject == "heavily used", answer == "no")
+       Question(subject == "awward winning", answer == "good")
     then
        System.out.println("Best typeface for you is Proforma");
-       insert(new Font("Proforma"))
+       insert(new Font("Proforma"));
 end
 
 
 rule "when to choose Miller"
     when
-       Question(subj = "where in newspaper", answer = "text face")
-       Question(subj = "person is called boring", answer = "no")
-       Question(subj = "heavily used", answer = "yes")
+       Question(subject == "where in newspaper", answer == "text face")
+       Question(subject == "person is called boring", answer == "no")
+       Question(subject == "heavily used", answer == "yes")
     then
        System.out.println("Best typeface for you is Miller");
-       insert(new Font("Miller"))
+       insert(new Font("Miller"));
 end
 
 rule "when to choose Times"
     when
-       Question(subj = "where in newspaper", answer = "text face")
-       Question(subj = "person is called boring", answer = "yes")
+       Question(subject == "where in newspaper", answer == "text face")
+       Question(subject == "person is called boring", answer == "yes")
     then
        System.out.println("Best typeface for you is Times");
-       insert(new Font("Times"))
+       insert(new Font("Times"));
 end
 
 rule "when to choose Swift"
     when
-       Question(subj = "where in newspaper", answer = "combination")
-       Question(subj = "thinks Spiekermann is right", answer = "no")
-       Question(subj = "Netherlands is nice", answer = "yes")
+       Question(subject == "where in newspaper", answer == "combination")
+       Question(subject == "thinks Spiekermann is right", answer == "no")
+       Question(subject == "Netherlands is nice", answer == "yes")
     then
        System.out.println("Best typeface for you is Swift");
-       insert(new Font("Swift"))
+       insert(new Font("Swift"));
 end
 
 rule "when to choose Arnhem"
     when
-    (
-       Question(subj = "where in newspaper", answer = "text face")
-       Question(subj = "person is called boring", answer = "no")
-       Question(subj = "heavily used", answer = "no")
-       Question(subj = "awward winning", answer = "bad")
-    ) or (
-       Question(subj = "where in newspaper", answer = "combination")
-       Question(subj = "thinks Spiekermann is right", answer = "yes")
+    (and
+       Question(subject == "where in newspaper", answer == "text face")
+       Question(subject == "person is called boring", answer == "no")
+       Question(subject == "heavily used", answer == "no")
+       Question(subject == "awward winning", answer == "bad")
+    )
+    or
+    (and
+       Question(subject == "where in newspaper", answer == "combination")
+       Question(subject == "thinks Spiekermann is right", answer == "yes")
     )
     then
        System.out.println("Best typeface for you is Arnhem");
-       insert(new Font("Arnhem"))
+       insert(new Font("Arnhem"));
 end
 
 rule "when to choose Interstate"
     when
-       Question(subj = "where in newspaper", answer = "display")
-       Question(subj = "likes it traditional", answer = "yes")
-       Question(subj = "ok with swiss", answer = "no")
-       Question(subj = "prefered age", answer = "new")
+       Question(subject == "where in newspaper", answer == "display")
+       Question(subject == "likes it traditional", answer == "yes")
+       Question(subject == "ok with swiss", answer == "no")
+       Question(subject == "prefered age", answer == "new")
     then
        System.out.println("Best typeface for you is Interstate");
-       insert(new Font("Interstate"))
+       insert(new Font("Interstate"));
 end
 
 rule "when to choose Helvetica"
     when
-       Question(subj = "where in newspaper", answer = "display")
-       and
-       (
-       Question(subj = "likes it traditional", answer = "yes")
-       Question(subj = "ok with swiss", answer = "yes")
-       or
-       Question(subj = "likes it traditional", answer = "no")
-       Question(subj = "modern yet plainspoken", answer = "no")
-       Question(subj = "pretend to live in the nineties", answer = "yes")
-       )
+   (and
+       Question(subject == "where in newspaper", answer == "display")
+       Question(subject == "likes it traditional", answer == "yes")
+       Question(subject == "ok with swiss", answer == "yes")
+   )
+    or
+   (and
+       Question(subject == "where in newspaper", answer == "display")
+       Question(subject == "likes it traditional", answer == "no")
+       Question(subject == "modern yet plainspoken", answer == "no")
+       Question(subject == "pretend to live in the nineties", answer == "yes")
+   )
     then
        System.out.println("Best typeface for you is Helvetica");
-       insert(new Font("Helvetica"))
+       insert(new Font("Helvetica"));
 end
 
 rule "when to choose FF Meta"
     when
-       Question(subj = "where in newspaper", answer = "display")
-       Question(subj = "likes it traditional", answer = "no")
-       Question(subj = "modern yet plainspoken", answer = "no")
-       Question(subj = "pretend to live in the nineties", answer = "no")
+       Question(subject == "where in newspaper", answer == "display")
+       Question(subject == "likes it traditional", answer == "no")
+       Question(subject == "modern yet plainspoken", answer == "no")
+       Question(subject == "pretend to live in the nineties", answer == "no")
     then
        System.out.println("Best typeface for you is FF Meta");
-       insert(new Font("FF Meta"))
+       insert(new Font("FF Meta"));
 end
 
 rule "when to choose Gotham"
     when
-       Question(subj = "where in newspaper", answer = "display")
-       Question(subj = "likes it traditional", answer = "no")
-       Question(subj = "modern yet plainspoken", answer = "yes")
+       Question(subject == "where in newspaper", answer == "display")
+       Question(subject == "likes it traditional", answer == "no")
+       Question(subject == "modern yet plainspoken", answer == "yes")
     then
        System.out.println("Best typeface for you is Gotham");
-       insert(new Font("Gotham"))
+       insert(new Font("Gotham"));
 end
