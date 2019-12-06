@@ -154,7 +154,7 @@ rule "ask if user got a lot of tables"
     when
         $q : Question($subj : subject == "got a lot of tables")
         not Answer(subject == $subj)
-        Answer(subject == "likes condensed", answer == "yes")
+        Answer(subject == "likes condensed", answer == "no")
     then
         String ans = askQuestion($q);
         insert(new Answer($subj, ans));
