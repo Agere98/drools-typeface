@@ -18,16 +18,14 @@ function String askQuestion(Question q) {
         return ans;
 }
 
-declare Font
-    name: String
-end
+function printResult(String typeface) {
+    System.out.println("Perfect typeface for you is " + typeface + ".");
+}
 
 //rule "ask question"
 //    when
 //        $q : Question($subj : subject)
-//        not Answer(subject == $subj)
 //        not Font()
-//    then
 //    String ans = askQuestion($q);
 //end
 
@@ -36,194 +34,190 @@ rule "ask about kind of project"
     when
         $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
-        not Font()
     then
         String ans = askQuestion($q);
-        kcontext.getKieRuntime().getAgenda().getAgendaGroup(ans).setFocus();
-        insert(new Answer($q.subject, ans));
+//        kcontext.getKieRuntime().getAgenda().getAgendaGroup(ans).setFocus();
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user is in doubt"
-    agenda-group "book"
+//    agenda-group "book"
     salience 49
     when
         $q : Question($subj : subject == "in doubt")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "kind of project", answer == "book")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if champion in usability needed"
-    agenda-group "book"
+//    agenda-group "book"
     salience 48
     when
         $q : Question($subj : subject == "champion in usability")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "in doubt", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user loves Garamond"
-    agenda-group "book"
+//    agenda-group "book"
     salience 47
     when
         $q : Question($subj : subject == "loves Garamond")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "champion in usability", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user would would want a larger eye"
-    agenda-group "book"
+//    agenda-group "book"
     salience 46
     when
         $q : Question($subj : subject == "would want a larger eye")
         not Answer(subject == $subj)
         Answer(subject == "loves Garamond", answer == "yes")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants as Sans Serif"
-    agenda-group "book"
+//    agenda-group "book"
     salience 45
     when
         $q : Question($subj : subject == "wants sans serif")
         not Answer(subject == $subj)
         Answer(subject == "loves Garamond", answer == "no")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask about user opinion of Eric Gill"
-    agenda-group "book"
+//    agenda-group "book"
     salience 44
     when
         $q : Question($subj : subject == "opinion of Eric Gill")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "wants sans serif", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes humanistic forms"
-    agenda-group "book"
+//    agenda-group "book"
     salience 43
     when
         $q : Question($subj : subject == "likes humanistic forms")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "opinion of Eric Gill", answer == "bad")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask what cheese user preferes"
-    agenda-group "book"
+//    agenda-group "book"
     salience 42
     when
         $q : Question($subj : subject == "preferred cheese")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "likes humanistic forms", answer == "yes")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes something condensed"
-    agenda-group "infographic"
+//    agenda-group "infographic"
     salience 49
     when
         $q : Question($subj : subject == "likes condensed")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "kind of project", answer == "infographic")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user got a lot of tables"
-    agenda-group "infographic"
+//    agenda-group "infographic"
     salience 48
     when
         $q : Question($subj : subject == "got a lot of tables")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "likes condensed", answer == "yes")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user cried watching Terminator"
-    agenda-group "infographic"
+//    agenda-group "infographic"
     salience 47
     when
         $q : Question($subj : subject == "cried watching Terminator")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "got a lot of tables", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask where user is going to use typerface"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 49
     when
         $q : Question($subj : subject == "where in newspaper")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "kind of project", answer == "newspaper")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user is called boring"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 48
     when
         $q : Question($subj : subject == "is called boring")
         not Answer(subject == $subj)
         Answer(subject == "where in newspaper", answer == "text face")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something heavily used"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 47
     when
         $q : Question($subj : subject == "heavily used")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "is called boring", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something award winning"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 46
     when
         $q : Question($subj : subject == "award winning")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "heavily used", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if Mr. Spiekermann is mostly right"
@@ -232,10 +226,10 @@ rule "ask if Mr. Spiekermann is mostly right"
     when
         $q : Question($subj : subject == "thinks Spiekermann is right")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "where in newspaper", answer == "combination")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if Netherlands is nice"
@@ -244,10 +238,10 @@ rule "ask if Netherlands is nice"
     when
         $q : Question($subj : subject == "Netherlands is nice")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "thinks Spierkermann is right", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes it traditional"
@@ -257,60 +251,57 @@ rule "ask if user likes it traditional"
         $q : Question($subj : subject == "likes it traditional")
         not Answer(subject == $subj)
         Answer(subject == "where in newspaper", answer == "display")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if swiss is okay"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 47
     when
         $q : Question($subj : subject == "ok with swiss")
         not Answer(subject == $subj)
         Answer(subject == "likes traditional", answer == "yes")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask about preferred age"
-    agenda-group "newpaper"
+//    agenda-group "newpaper"
     salience 46
     when
         $q : Question($subj : subject == "preferred age")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "ok with swiss", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something modern, yet planspoken"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 47
     when
         $q : Question($subj : subject == "moder yet plainspoken")
         not Answer(subject == $subj)
         Answer(subject == "likes it traditional", answer == "no")
-        not Font()
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "ask if user pretends to live in nineties"
-    agenda-group "newspaper"
+//    agenda-group "newspaper"
     salience 46
     when
         $q : Question($subj : subject == "pretend to live in nineties")
         not Answer(subject == $subj)
-        not Font()
+        Answer(subject == "modern yet plainspoken", answer == "no")
     then
         String ans = askQuestion($q);
-        insert(new Answer($q.subject, ans));
+        insert(new Answer($subj, ans));
 end
 
 rule "when to choose Syntax"
@@ -321,11 +312,9 @@ rule "when to choose Syntax"
 //       Answer(subject == "sans serif", answer == "no")
 //       Answer(subject == "opinion of Eric Gill", answer == "bad")
 //       Answer(subject == "likes humanistic forms", answer == "yes")
-       Answer(subject == "preffered cheese", answer == "emmental")
-       not Font()
+       Answer(subject == "preferred cheese", answer == "emmental")
     then
-       System.out.println("Best typeface for you is Syntax");
-       insert(new Font("Syntax"));
+       printResult("Syntax");
 end
 
 rule "when to choose FF Scala"
@@ -336,11 +325,9 @@ rule "when to choose FF Scala"
 //       Answer(subject == "sans serif", answer == "no")
 //       Answer(subject == "opinion of Eric Gill", answer == "bad")
 //       Answer(subject == "likes humanistic forms", answer == "yes")
-       Answer(subject == "preffered cheese", answer == "gouda")
-       not Font()
+       Answer(subject == "preferred cheese", answer == "gouda")
     then
-       System.out.println("Best typeface for you is FF Scala");
-       insert(new Font("FF Scala"));
+       printResult("FF Scala");
 end
 
 rule "when to choose Baskerville"
@@ -351,10 +338,8 @@ rule "when to choose Baskerville"
 //       Answer(subject == "sans serif", answer == "no")
 //       Answer(subject == "opinion of Eric Gill", answer == "bad")
        Answer(subject == "likes humanistic forms", answer == "no")
-       not Font()
     then
-       System.out.println("Best typeface for you is Baskerville");
-       insert(new Font("Baskerville"));
+       printResult("Baskerville");
 end
 
 rule "when to choose Joanna"
@@ -364,10 +349,8 @@ rule "when to choose Joanna"
 //       Answer(subject == "loves Garamond", answer == "no")
 //       Answer(subject == "sans serif", answer == "no")
        Answer(subject == "opinion of Eric Gill", answer == "good")
-       not Font()
     then
-       System.out.println("Best typeface for you is Joanna");
-       insert(new Font("Joanna"));
+       printResult("Joanna");
 end
 
 rule "when to choose Optima"
@@ -376,10 +359,8 @@ rule "when to choose Optima"
 //       Answer(subject == "champion in usablity", answer == "no")
 //       Answer(subject == "loves Garamond", answer == "yes")
        Answer(subject == "would want a larger eye", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Optima");
-       insert(new Font("Optima"));
+       printResult("Optima");
 end
 
 rule "when to choose Sabon"
@@ -388,10 +369,8 @@ rule "when to choose Sabon"
 //       Answer(subject == "champion in usablity", answer == "no")
 //       Answer(subject == "loves Garamond", answer == "yes")
        Answer(subject == "would want a larger eye", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Sabon");
-       insert(new Font("Sabon"));
+       printResult("Sabon");
 end
 
 rule "when to choose Garamond"
@@ -400,29 +379,23 @@ rule "when to choose Garamond"
 //       Answer(subject == "champion in usablity", answer == "no")
 //       Answer(subject == "loves Garamond", answer == "yes")
        Answer(subject == "would want a larger eye", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Garamond");
-       insert(new Font("Garamond"));
+       printResult("Garamond");
 end
 
 rule "when to choose Minion"
     when
 //       Answer(subject == "in doubt", answer == "no")
        Answer(subject == "champion in usablity", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Minion");
-       insert(new Font("Minion"));
+       printResult("Minion");
 end
 
 rule "when to choose Caslon"
     when
        Answer(subject == "in doubt", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Caslon");
-       insert(new Font("Caslon"));
+       printResult("Caslon");
 end
 
 rule "when to choose FF DIN"
@@ -430,10 +403,8 @@ rule "when to choose FF DIN"
 //       Answer(subject == "likes condensed", answer == "no")
 //       Answer(subject == "got a lot of tables", answer == "no")
        Answer(subject == "cried watching Terminator", answer == "no")
-       not Font()
     then
-       System.out.println("Best typeface for you is FF Din");
-       insert(new Font("FF DIN"));
+       printResult("FF DIN");
 end
 
 rule "when to choose OCR"
@@ -441,29 +412,23 @@ rule "when to choose OCR"
 //       Answer(subject == "likes condensed", answer == "no")
 //       Answer(subject == "got a lot of tables", answer == "no")
        Answer(subject == "cried watching Terminator", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is OCR");
-       insert(new Font("OCR"));
+       printResult("OCR");
 end
 
 rule "when to choose Letter Gothic"
     when
 //       Answer(subject == "likes condensed", answer == "no")
        Answer(subject == "got a lot of tables", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Letter Gothic");
-       insert(new Font("Letter Gothic"));
+       printResult("Letter Gothic");
 end
 
 rule "when to choose Univers"
     when
        Answer(subject == "likes condensed", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Univers");
-       insert(new Font("Univers"));
+       printResult("Univers");
 end
 
 rule "when to choose Proforma"
@@ -472,10 +437,8 @@ rule "when to choose Proforma"
 //       Answer(subject == "user is called boring", answer == "no")
 //       Answer(subject == "heavily used", answer == "no")
        Answer(subject == "award winning", answer == "good")
-       not Font()
     then
-       System.out.println("Best typeface for you is Proforma");
-       insert(new Font("Proforma"));
+       printResult("Proforma");
 end
 
 rule "when to choose Miller"
@@ -483,20 +446,16 @@ rule "when to choose Miller"
 //       Answer(subject == "where in newspaper", answer == "text face")
 //       Answer(subject == "user is called boring", answer == "no")
        Answer(subject == "heavily used", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Miller");
-       insert(new Font("Miller"));
+       printResult("Miller");
 end
 
 rule "when to choose Times"
     when
 //       Answer(subject == "where in newspaper", answer == "text face")
        Answer(subject == "user is called boring", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Times");
-       insert(new Font("Times"));
+       printResult("Times");
 end
 
 rule "when to choose Swift"
@@ -504,10 +463,8 @@ rule "when to choose Swift"
        Answer(subject == "where in newspaper", answer == "combination")
        Answer(subject == "thinks Spiekermann is right", answer == "no")
        Answer(subject == "Netherlands is nice", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Swift");
-       insert(new Font("Swift"));
+       printResult("Swift");
 end
 
 rule "when to choose Arnhem"
@@ -523,10 +480,8 @@ rule "when to choose Arnhem"
 //       Answer(subject == "where in newspaper", answer == "combination")
        Answer(subject == "thinks Spiekermann is right", answer == "yes")
     )
-    not Font()
     then
-       System.out.println("Best typeface for you is Arnhem");
-       insert(new Font("Arnhem"));
+       printResult("Arnhem");
 end
 
 rule "when to choose Interstate"
@@ -535,10 +490,8 @@ rule "when to choose Interstate"
 //       Answer(subject == "likes it traditional", answer == "yes")
 //       Answer(subject == "ok with swiss", answer == "no")
        Answer(subject == "prefered age", answer == "new")
-       not Font()
     then
-       System.out.println("Best typeface for you is Interstate");
-       insert(new Font("Interstate"));
+       printResult("Interstate");
 end
 
 rule "when to choose Helvetica"
@@ -555,10 +508,8 @@ rule "when to choose Helvetica"
 //       Answer(subject == "modern yet plainspoken", answer == "no")
        Answer(subject == "pretend to live in the nineties", answer == "yes")
    )
-       not Font()
     then
-       System.out.println("Best typeface for you is Helvetica");
-       insert(new Font("Helvetica"));
+       printResult("Helvetica");
 end
 
 rule "when to choose FF Meta"
@@ -567,10 +518,8 @@ rule "when to choose FF Meta"
 //       Answer(subject == "likes it traditional", answer == "no")
 //       Answer(subject == "modern yet plainspoken", answer == "no")
        Answer(subject == "pretend to live in the nineties", answer == "no")
-       not Font()
     then
-       System.out.println("Best typeface for you is FF Meta");
-       insert(new Font("FF Meta"));
+       printResult("FF Meta");
 end
 
 rule "when to choose Gotham"
@@ -578,8 +527,6 @@ rule "when to choose Gotham"
 //       Answer(subject == "where in newspaper", answer == "display")
 //       Answer(subject == "likes it traditional", answer == "no")
        Answer(subject == "modern yet plainspoken", answer == "yes")
-       not Font()
     then
-       System.out.println("Best typeface for you is Gotham");
-       insert(new Font("Gotham"));
+       printResult("Gotham");
 end
