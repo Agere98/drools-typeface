@@ -34,7 +34,7 @@
   },
   {
     "content": "But perhaps one would want a larger eye?",
-    "subject": "wants a larger eye",
+    "subject": "would want a larger eye",
     "possibleAnswers": [
       "yes",
       "no"
@@ -50,7 +50,7 @@
   },
   {
     "content": "What is your opinion of Eric Gill?",
-    "subject": "opinion of Eriv Gill",
+    "subject": "opinion of Eric Gill",
     "possibleAnswers": [
       "good",
       "bad"
@@ -123,7 +123,7 @@
   },
   {
     "content": "How about something award winning?",
-    "subject": "awward winning",
+    "subject": "award winning",
     "possibleAnswers": [
       "good",
       "bad"
