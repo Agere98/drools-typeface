@@ -2,10 +2,14 @@ package pl.put.poznan;
 
 import pl.put.poznan.Main.Question
 import pl.put.poznan.Main.Answer
+import pl.put.poznan.TypefaceGUI
+import pl.put.poznan.QuestionPanel
 import java.util.Scanner
 import java.util.Arrays
 
 function String askQuestion(Question q) {
+		QuestionPanel panel = new QuestionPanel(TypefaceGUI.getFrame(), q);
+		panel.show();
         System.out.println(q.content);
         for(String posan : q.possibleAnswers) System.out.println("-" + posan);
         Scanner s = new Scanner(System.in);
