@@ -53,7 +53,7 @@ rule "init"
 
 rule "ask about kind of project"
     when
-        $q : Question($subj : "kind of project";)
+        $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
     then
         String ans = askQuestion($q);
@@ -62,7 +62,7 @@ end
 
 rule "ask if user is in doubt"
     when
-        $q : Question($subj : subject == "in doubt";)
+        $q : Question($subj : subject == "in doubt")
         not Answer(subject == $subj)
         Answer("kind of project", "book";)
     then
@@ -72,7 +72,7 @@ end
 
 rule "ask if champion in usability needed"
     when
-        $q : Question($subj : "champion in usability";)
+        $q : Question($subj : subject == "champion in usability")
         not Answer(subject == $subj)
         Answer("in doubt", "no";)
     then
@@ -82,7 +82,7 @@ end
 
 rule "ask if user loves Garamond"
     when
-        $q : Question($subj : "loves Garamond";)
+        $q : Question($subj : subject == "loves Garamond")
         not Answer(subject == $subj)
         Answer("champion in usability","no";)
     then
@@ -92,7 +92,7 @@ end
 
 rule "ask if user would would want a larger eye"
     when
-        $q : Question($subj : "would want a larger eye";)
+        $q : Question($subj : subject == "would want a larger eye")
         not Answer(subject == $subj)
         Answer("loves Garamond","yes";)
     then
@@ -102,7 +102,7 @@ end
 
 rule "ask if user wants as Sans Serif"
     when
-        $q : Question($subj : "wants sans serif";)
+        $q : Question($subj : subject == "wants sans serif")
         not Answer(subject == $subj)
         Answer("loves Garamond","no";)
     then
@@ -112,7 +112,7 @@ end
 
 rule "ask about user opinion of Eric Gill"
     when
-        $q : Question($subj : "opinion of Eric Gill";)
+        $q : Question($subj : subject == "opinion of Eric Gill")
         not Answer(subject == $subj)
         Answer("wants sans serif","no";)
     then
@@ -122,7 +122,7 @@ end
 
 rule "ask if user likes humanistic forms"
     when
-        $q : Question($subj : "likes humanistic forms";)
+        $q : Question($subj : subject == "likes humanistic forms")
         not Answer(subject == $subj)
         Answer("opinion of Eric Gill","bad";)
     then
@@ -132,7 +132,7 @@ end
 
 rule "ask what cheese user preferes"
     when
-        $q : Question($subj : "preferred cheese";)
+        $q : Question($subj : subject == "preferred cheese")
         not Answer(subject == $subj)
         Answer("likes humanistic forms","yes";)
     then
@@ -142,7 +142,7 @@ end
 
 rule "ask if user likes something condensed"
     when
-        $q : Question($subj : "likes condensed";)
+        $q : Question($subj : subject == "likes condensed")
         not Answer(subject == $subj)
         Answer("kind of project","infographic";)
     then
@@ -152,7 +152,7 @@ end
 
 rule "ask if user got a lot of tables"
     when
-        $q : Question($subj : "got a lot of tables";)
+        $q : Question($subj : subject == "got a lot of tables")
         not Answer(subject == $subj)
         Answer("likes condensed","yes";)
     then
@@ -162,7 +162,7 @@ end
 
 rule "ask if user cried watching Terminator"
     when
-        $q : Question($subj : "cried watching Terminator";)
+        $q : Question($subj : subject == "cried watching Terminator")
         not Answer(subject == $subj)
         Answer("got a lot of tables","no";)
     then
@@ -172,7 +172,7 @@ end
 
 rule "ask where user is going to use typerface"
     when
-        $q : Question($subj : "where in newspaper";)
+        $q : Question($subj : subject == "where in newspaper")
         not Answer(subject == $subj)
         Answer("kind of project","newspaper";)
     then
@@ -182,7 +182,7 @@ end
 
 rule "ask if user is called boring"
     when
-        $q : Question($subj : "is called boring";)
+        $q : Question($subj : subject == "is called boring")
         not Answer(subject == $subj)
         Answer("where in newspaper","text face";)
     then
@@ -192,7 +192,7 @@ end
 
 rule "ask if user wants something heavily used"
     when
-        $q : Question($subj : "heavily used";)
+        $q : Question($subj : subject == "heavily used")
         not Answer(subject == $subj)
         Answer("is called boring","no";)
     then
@@ -202,7 +202,7 @@ end
 
 rule "ask if user wants something award winning"
     when
-        $q : Question($subj : "award winning";)
+        $q : Question($subj : subject == "award winning")
         not Answer(subject == $subj)
         Answer("heavily used","no";)
     then
@@ -213,7 +213,7 @@ end
 rule "ask if Mr. Spiekermann is mostly right"
     agenda-group "newspaper"
     when
-        $q : Question($subj : "thinks Spiekermann is right";)
+        $q : Question($subj : subject == "thinks Spiekermann is right")
         not Answer(subject == $subj)
         Answer("where in newspaper","combination";)
     then
@@ -224,7 +224,7 @@ end
 rule "ask if Netherlands is nice"
     agenda-group "newspaper"
     when
-        $q : Question($subj : "Netherlands is nice";)
+        $q : Question($subj : subject == "Netherlands is nice")
         not Answer(subject == $subj)
         Answer("thinks Spierkermann is right","no";)
     then
@@ -235,7 +235,7 @@ end
 rule "ask if user likes it traditional"
     agenda-group "newspaper"
     when
-        $q : Question($subj : "likes it traditional";)
+        $q : Question($subj : subject == "likes it traditional")
         not Answer(subject == $subj)
         Answer("where in newspaper","display";)
     then
@@ -245,7 +245,7 @@ end
 
 rule "ask if swiss is okay"
     when
-        $q : Question($subj : "ok with swiss";)
+        $q : Question($subj : subject == "ok with swiss")
         not Answer(subject == $subj)
         Answer("likes traditional","yes";)
     then
@@ -255,7 +255,7 @@ end
 
 rule "ask about preferred age"
     when
-        $q : Question($subj : "preferred age";)
+        $q : Question($subj : subject == "preferred age")
         not Answer(subject == $subj)
         Answer("ok with swiss","no";)
     then
@@ -265,7 +265,7 @@ end
 
 rule "ask if user wants something modern, yet planspoken"
     when
-        $q : Question($subj : "moder yet plainspoken";)
+        $q : Question($subj : subject == "moder yet plainspoken")
         not Answer(subject == $subj)
         Answer("likes it traditional","no";)
     then
@@ -275,7 +275,7 @@ end
 
 rule "ask if user pretends to live in nineties"
     when
-        $q : Question($subj : "pretend to live in nineties";)
+        $q : Question($subj : subject == "pretend to live in nineties")
         not Answer(subject == $subj)
         Answer("modern yet plainspoken","no";)
     then
@@ -334,7 +334,7 @@ end
 
 rule "when to choose Minion"
     when
-       Answer("champion in usablity","yes";)
+       Answer("champion in usability","yes";)
     then
        printResult("Minion");
 end
@@ -390,7 +390,7 @@ end
 
 rule "when to choose Times"
     when
-       Answer("user is called boring","yes";)
+       Answer("is called boring","yes";)
     then
        printResult("Times");
 end
