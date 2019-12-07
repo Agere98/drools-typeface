@@ -12,7 +12,12 @@ public class TypefaceGUI {
 	private static void createAndShowGUI() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(800, 600);
+        frame.setSize(688, 400);
+        frame.setResizable(false);
+        
+        StartPanel panel = new StartPanel(frame);
+        panel.show();
+        
         frame.setVisible(true);
     }
 	

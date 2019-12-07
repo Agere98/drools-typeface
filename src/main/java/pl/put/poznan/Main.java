@@ -89,5 +89,5 @@ public class Main {
             answer = ans;
         }
     }
-
+    public static class Init {}
 }

@@ -2,6 +2,7 @@ package pl.put.poznan;
 
 import pl.put.poznan.Main.Question
 import pl.put.poznan.Main.Answer
+import pl.put.poznan.Main.Init
 import pl.put.poznan.TypefaceGUI
 import pl.put.poznan.QuestionPanel
 import java.util.Scanner
@@ -38,6 +39,7 @@ function printResult(String typeface) {
 rule "ask about kind of project"
     salience 50
     when
+    	Init()
         $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
     then
