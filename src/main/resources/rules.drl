@@ -23,7 +23,9 @@ function askQuestion(Question q) {
 }
 
 function printResult(String typeface) {
-    System.out.println("Perfect typeface for you is " + typeface + ".");
+	ResultPanel panel = new ResultPanel(TypefaceGUI.getFrame(), typeface);
+	panel.show();
+    //System.out.println("Perfect typeface for you is " + typeface + ".");
 }
 
 //rule "ask question"
