@@ -283,39 +283,18 @@ rule "ask if user pretends to live in nineties"
         insert(new Answer($subj, ans));
 end
 
-rule "when to choose Syntax"
+rule "when to choose Caslon"
     when
-       Answer("preferred cheese","emmental";)
+       Answer("in doubt","yes";)
     then
-       printResult("Syntax");
+       printResult("Caslon");
 end
 
-rule "when to choose FF Scala"
+rule "when to choose Minion"
     when
-       Answer("preferred cheese","gouda";)
+       Answer("champion in usability","yes";)
     then
-       printResult("FF Scala");
-end
-
-rule "when to choose Baskerville"
-    when
-       Answer("likes humanistic forms","no";)
-    then
-       printResult("Baskerville");
-end
-
-rule "when to choose Joanna"
-    when
-       Answer("opinion of Eric Gill","good";)
-    then
-       printResult("Joanna");
-end
-
-rule "when to choose Optima"
-    when
-       Answer("would want a larger eye","yes";)
-    then
-       printResult("Optima");
+       printResult("Minion");
 end
 
 rule "when to choose Sabon"
@@ -327,44 +306,44 @@ end
 
 rule "when to choose Garamond"
     when
-       Answer("would want a larger eye","yes";)
+       Answer("would want a larger eye","no";)
     then
        printResult("Garamond");
 end
 
-rule "when to choose Minion"
+rule "when to choose Optima"
     when
-       Answer("champion in usability","yes";)
+       Answer("wants sans serif","yes";)
     then
-       printResult("Minion");
+       printResult("Optima");
 end
 
-rule "when to choose Caslon"
+rule "when to choose Joanna"
     when
-       Answer("in doubt","yes";)
+       Answer("opinion of Eric Gill","good";)
     then
-       printResult("Caslon");
+       printResult("Joanna");
 end
 
-rule "when to choose FF DIN"
+rule "when to choose Baskerville"
     when
-       Answer("cried watching Terminator","no";)
+       Answer("likes humanistic forms","no";)
     then
-       printResult("FF DIN");
+       printResult("Baskerville");
 end
 
-rule "when to choose OCR"
+rule "when to choose FF Scala"
     when
-       Answer("cried watching Terminator","yes";)
+       Answer("preferred cheese","gouda";)
     then
-       printResult("OCR");
+       printResult("FF Scala");
 end
 
-rule "when to choose Letter Gothic"
+rule "when to choose Syntax"
     when
-       Answer("got a lot of tables","yes";)
+       Answer("preferred cheese","emmental";)
     then
-       printResult("Letter Gothic");
+       printResult("Syntax");
 end
 
 rule "when to choose Univers"
@@ -374,18 +353,25 @@ rule "when to choose Univers"
        printResult("Univers");
 end
 
-rule "when to choose Proforma"
+rule "when to choose Letter Gothic"
     when
-       Answer("award winning","good";)
+       Answer("got a lot of tables","yes";)
     then
-       printResult("Proforma");
+       printResult("Letter Gothic");
 end
 
-rule "when to choose Miller"
+rule "when to choose OCR"
     when
-       Answer("heavily used","yes";)
+       Answer("cried watching Terminator","yes";)
     then
-       printResult("Miller");
+       printResult("OCR");
+end
+
+rule "when to choose FF DIN"
+    when
+       Answer("cried watching Terminator","no";)
+    then
+       printResult("FF DIN");
 end
 
 rule "when to choose Times"
@@ -395,11 +381,18 @@ rule "when to choose Times"
        printResult("Times");
 end
 
-rule "when to choose Swift"
+rule "when to choose Miller"
     when
-       Answer("Netherlands is nice","yes";)
+       Answer("heavily used","yes";)
     then
-       printResult("Swift");
+       printResult("Miller");
+end
+
+rule "when to choose Proforma"
+    when
+       Answer("award winning","good";)
+    then
+       printResult("Proforma");
 end
 
 rule "when to choose Arnhem"
@@ -411,11 +404,25 @@ rule "when to choose Arnhem"
        printResult("Arnhem");
 end
 
-rule "when to choose Interstate"
+rule "when to choose Swift"
     when
-       Answer("prefered age","new";)
+       Answer("Netherlands is nice","yes";)
     then
-       printResult("Interstate");
+       printResult("Swift");
+end
+
+rule "when to choose Gotham"
+    when
+       Answer("modern yet plainspoken","yes";)
+    then
+       printResult("Gotham");
+end
+
+rule "when to choose FF Meta"
+    when
+       Answer("pretend to live in the nineties","no";)
+    then
+       printResult("FF Meta");
 end
 
 rule "when to choose Helvetica"
@@ -427,16 +434,16 @@ rule "when to choose Helvetica"
        printResult("Helvetica");
 end
 
-rule "when to choose FF Meta"
+rule "when to choose Interstate"
     when
-       Answer("pretend to live in the nineties","no";)
+       Answer("prefered age","new";)
     then
-       printResult("FF Meta");
+       printResult("Interstate");
 end
 
-rule "when to choose Gotham"
+rule "when to choose Franklin Gothic"
     when
-       Answer("modern yet plainspoken","yes";)
+       Answer("prefered age","old";)
     then
-       printResult("Gotham");
+       printResult("Interstate");
 end
