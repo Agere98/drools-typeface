@@ -6,15 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import pl.put.poznan.Main.Question;
+import pl.put.poznan.Main.Answer;
 
 public class QuestionPanel implements ActionListener {
 
 	private JFrame parent;
 	private JPanel panel;
 	private JButton nextButton;
+	private Question question;
 	private String answer;
 
 	public QuestionPanel(JFrame parent, Question question) {
+		this.question = question;
 		this.parent = parent;
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -48,7 +51,7 @@ public class QuestionPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		if (action == "_next_") {
-			System.out.println(answer);
+			TypefaceGUI.getSession().insert(new Answer(question.getSubject(), answer));
 		}
 		else {
 			answer = action;

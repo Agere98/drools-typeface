@@ -18,12 +18,13 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(final String[] args) throws FileNotFoundException {
-        TypefaceGUI.startGUI();
          
         KieServices kieServices = KieServices.Factory.get();
         KieContainer kContainer = kieServices.getKieClasspathContainer();
         KieBase kieBase = kContainer.getKieBase();
         KieSession session = kieBase.newKieSession();
+
+        TypefaceGUI.startGUI(session);
 
         Gson gson = new Gson();
 
