@@ -1,12 +1,13 @@
 package pl.put.poznan;
 
-import org.drools.core.audit.WorkingMemoryFileLogger;
-import org.drools.core.event.DebugAgendaEventListener;
-import org.drools.core.event.DebugRuleRuntimeEventListener;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
+import org.kie.api.definition.type.Position;
+import org.kie.api.event.rule.DebugAgendaEventListener;
+import org.kie.api.event.rule.DebugRuleRuntimeEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+
 import java.io.FileNotFoundException;
 
 public class Main {
@@ -18,10 +19,39 @@ public class Main {
         KieSession session = kieBase.newKieSession();
         session.addEventListener( new DebugRuleRuntimeEventListener());
         session.addEventListener( new DebugAgendaEventListener());
-        final WorkingMemoryFileLogger logger = new WorkingMemoryFileLogger();
-        logger.setFileName("typeface_log");
         session.fireAllRules();
-        logger.writeToDisk();
         session.dispose();
     }
+
+    public static class Question {
+        public String content;
+        @Position(0)
+        public String subject;
+        public String[] possibleAnswers;
+
+        public String getSubject() {
+            return subject;
+        }
+
+        @Override
+        public String toString() {
+            return content;
+        }
+    }
+    public static class Answer {
+        @Position(0)
+        public String subject;
+        @Position(1)
+        public String answer;
+
+        public String getAnswer() {
+            return answer;
+        }
+
+        public Answer(String subj, String ans) {
+            subject = subj;
+            answer = ans;
+        }
+    }
+
 }
