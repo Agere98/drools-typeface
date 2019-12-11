@@ -7,6 +7,11 @@ import pl.put.poznan.TypefaceGUI
 import pl.put.poznan.QuestionPanel
 import java.util.Scanner
 import java.util.Arrays
+import com.google.gson.Gson
+import com.google.gson.stream.JsonReader
+import java.io.InputStream
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 function askQuestion(Question q) {
 		QuestionPanel panel = new QuestionPanel(TypefaceGUI.getFrame(), q);
@@ -29,200 +34,174 @@ function printResult(String typeface) {
     //System.out.println("Perfect typeface for you is " + typeface + ".");
 }
 
-//rule "ask question"
-//    when
-//        $q : Question($subj : subject)
-//        not Font()
-//    askQuestion($q);
-//end
+rule "init"
+    when
+    then
+        Gson gson = new Gson();
+
+        InputStream is = Main.class.getResourceAsStream("/typeface_questions.json");
+        JsonReader reader = new JsonReader(new BufferedReader(new InputStreamReader(is)));
+
+        Question[] questions = gson.fromJson(reader, Question[].class);
+        for (Question q : questions) {
+            insert(q);
+        }
+    end
 
 rule "ask about kind of project"
-    salience 50
     when
     	Init()
         $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
     then
         askQuestion($q);
-//        kcontext.getKieRuntime().getAgenda().getAgendaGroup(ans).setFocus();
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user is in doubt"
-//    agenda-group "book"
-    salience 49
     when
         $q : Question($subj : subject == "in doubt")
         not Answer(subject == $subj)
-        Answer(subject == "kind of project", answer == "book")
+        Answer("kind of project", "book";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if champion in usability needed"
-//    agenda-group "book"
-    salience 48
     when
         $q : Question($subj : subject == "champion in usability")
         not Answer(subject == $subj)
-        Answer(subject == "in doubt", answer == "no")
+        Answer("in doubt", "no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user loves Garamond"
-//    agenda-group "book"
-    salience 47
     when
         $q : Question($subj : subject == "loves Garamond")
         not Answer(subject == $subj)
-        Answer(subject == "champion in usability", answer == "no")
+        Answer("champion in usability","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user would would want a larger eye"
-//    agenda-group "book"
-    salience 46
     when
         $q : Question($subj : subject == "would want a larger eye")
         not Answer(subject == $subj)
-        Answer(subject == "loves Garamond", answer == "yes")
+        Answer("loves Garamond","yes";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants as Sans Serif"
-//    agenda-group "book"
-    salience 45
     when
         $q : Question($subj : subject == "wants sans serif")
         not Answer(subject == $subj)
-        Answer(subject == "loves Garamond", answer == "no")
+        Answer("loves Garamond","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask about user opinion of Eric Gill"
-//    agenda-group "book"
-    salience 44
     when
         $q : Question($subj : subject == "opinion of Eric Gill")
         not Answer(subject == $subj)
-        Answer(subject == "wants sans serif", answer == "no")
+        Answer("wants sans serif","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes humanistic forms"
-//    agenda-group "book"
-    salience 43
     when
         $q : Question($subj : subject == "likes humanistic forms")
         not Answer(subject == $subj)
-        Answer(subject == "opinion of Eric Gill", answer == "bad")
+        Answer("opinion of Eric Gill","bad";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask what cheese user preferes"
-//    agenda-group "book"
-    salience 42
     when
         $q : Question($subj : subject == "preferred cheese")
         not Answer(subject == $subj)
-        Answer(subject == "likes humanistic forms", answer == "yes")
+        Answer("likes humanistic forms","yes";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes something condensed"
-//    agenda-group "infographic"
-    salience 49
     when
         $q : Question($subj : subject == "likes condensed")
         not Answer(subject == $subj)
-        Answer(subject == "kind of project", answer == "infographic")
+        Answer("kind of project","infographic";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user got a lot of tables"
-//    agenda-group "infographic"
-    salience 48
     when
         $q : Question($subj : subject == "got a lot of tables")
         not Answer(subject == $subj)
-        Answer(subject == "likes condensed", answer == "no")
+        Answer("likes condensed","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user cried watching Terminator"
-//    agenda-group "infographic"
-    salience 47
     when
         $q : Question($subj : subject == "cried watching Terminator")
         not Answer(subject == $subj)
-        Answer(subject == "got a lot of tables", answer == "no")
+        Answer("got a lot of tables","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask where user is going to use typerface"
-//    agenda-group "newspaper"
-    salience 49
     when
         $q : Question($subj : subject == "where in newspaper")
         not Answer(subject == $subj)
-        Answer(subject == "kind of project", answer == "newspaper")
+        Answer("kind of project","newspaper";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user is called boring"
-//    agenda-group "newspaper"
-    salience 48
     when
         $q : Question($subj : subject == "is called boring")
         not Answer(subject == $subj)
-        Answer(subject == "where in newspaper", answer == "text face")
+        Answer("where in newspaper","text face";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something heavily used"
-//    agenda-group "newspaper"
-    salience 47
     when
         $q : Question($subj : subject == "heavily used")
         not Answer(subject == $subj)
-        Answer(subject == "is called boring", answer == "no")
+        Answer("is called boring","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something award winning"
-//    agenda-group "newspaper"
-    salience 46
     when
         $q : Question($subj : subject == "award winning")
         not Answer(subject == $subj)
-        Answer(subject == "heavily used", answer == "no")
+        Answer("heavily used","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
@@ -230,11 +209,10 @@ end
 
 rule "ask if Mr. Spiekermann is mostly right"
     agenda-group "newspaper"
-    salience 48
     when
         $q : Question($subj : subject == "thinks Spiekermann is right")
         not Answer(subject == $subj)
-        Answer(subject == "where in newspaper", answer == "combination")
+        Answer("where in newspaper","combination";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
@@ -242,11 +220,10 @@ end
 
 rule "ask if Netherlands is nice"
     agenda-group "newspaper"
-    salience 47
     when
         $q : Question($subj : subject == "Netherlands is nice")
         not Answer(subject == $subj)
-        Answer(subject == "thinks Spierkermann is right", answer == "no")
+        Answer("thinks Spierkermann is right","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
@@ -254,287 +231,216 @@ end
 
 rule "ask if user likes it traditional"
     agenda-group "newspaper"
-    salience 48
     when
         $q : Question($subj : subject == "likes it traditional")
         not Answer(subject == $subj)
-        Answer(subject == "where in newspaper", answer == "display")
+        Answer("where in newspaper","display";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if swiss is okay"
-//    agenda-group "newspaper"
-    salience 47
     when
         $q : Question($subj : subject == "ok with swiss")
         not Answer(subject == $subj)
-        Answer(subject == "likes traditional", answer == "yes")
+        Answer("likes traditional","yes";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask about preferred age"
-//    agenda-group "newpaper"
-    salience 46
     when
         $q : Question($subj : subject == "preferred age")
         not Answer(subject == $subj)
-        Answer(subject == "ok with swiss", answer == "no")
+        Answer("ok with swiss","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something modern, yet planspoken"
-//    agenda-group "newspaper"
-    salience 47
     when
         $q : Question($subj : subject == "moder yet plainspoken")
         not Answer(subject == $subj)
-        Answer(subject == "likes it traditional", answer == "no")
+        Answer("likes it traditional","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
 rule "ask if user pretends to live in nineties"
-//    agenda-group "newspaper"
-    salience 46
     when
         $q : Question($subj : subject == "pretend to live in nineties")
         not Answer(subject == $subj)
-        Answer(subject == "modern yet plainspoken", answer == "no")
+        Answer("modern yet plainspoken","no";)
     then
         askQuestion($q);
         //insert(new Answer($subj, ans));
 end
 
-rule "when to choose Syntax"
+rule "when to choose Caslon"
     when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "no")
-//       Answer(subject == "sans serif", answer == "no")
-//       Answer(subject == "opinion of Eric Gill", answer == "bad")
-//       Answer(subject == "likes humanistic forms", answer == "yes")
-       Answer(subject == "preferred cheese", answer == "emmental")
+       Answer("in doubt","yes";)
     then
-       printResult("Syntax");
+       printResult("Caslon");
 end
 
-rule "when to choose FF Scala"
+rule "when to choose Minion"
     when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "no")
-//       Answer(subject == "sans serif", answer == "no")
-//       Answer(subject == "opinion of Eric Gill", answer == "bad")
-//       Answer(subject == "likes humanistic forms", answer == "yes")
-       Answer(subject == "preferred cheese", answer == "gouda")
+       Answer("champion in usability","yes";)
     then
-       printResult("FF Scala");
-end
-
-rule "when to choose Baskerville"
-    when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "no")
-//       Answer(subject == "sans serif", answer == "no")
-//       Answer(subject == "opinion of Eric Gill", answer == "bad")
-       Answer(subject == "likes humanistic forms", answer == "no")
-    then
-       printResult("Baskerville");
-end
-
-rule "when to choose Joanna"
-    when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "no")
-//       Answer(subject == "sans serif", answer == "no")
-       Answer(subject == "opinion of Eric Gill", answer == "good")
-    then
-       printResult("Joanna");
-end
-
-rule "when to choose Optima"
-    when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "yes")
-       Answer(subject == "would want a larger eye", answer == "yes")
-    then
-       printResult("Optima");
+       printResult("Minion");
 end
 
 rule "when to choose Sabon"
     when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "yes")
-       Answer(subject == "would want a larger eye", answer == "yes")
+       Answer("would want a larger eye","yes";)
     then
        printResult("Sabon");
 end
 
 rule "when to choose Garamond"
     when
-//       Answer(subject == "in doubt", answer == "no")
-//       Answer(subject == "champion in usablity", answer == "no")
-//       Answer(subject == "loves Garamond", answer == "yes")
-       Answer(subject == "would want a larger eye", answer == "yes")
+       Answer("would want a larger eye","no";)
     then
        printResult("Garamond");
 end
 
-rule "when to choose Minion"
+rule "when to choose Optima"
     when
-//       Answer(subject == "in doubt", answer == "no")
-       Answer(subject == "champion in usablity", answer == "yes")
+       Answer("wants sans serif","yes";)
     then
-       printResult("Minion");
+       printResult("Optima");
 end
 
-rule "when to choose Caslon"
+rule "when to choose Joanna"
     when
-       Answer(subject == "in doubt", answer == "yes")
+       Answer("opinion of Eric Gill","good";)
     then
-       printResult("Caslon");
+       printResult("Joanna");
 end
 
-rule "when to choose FF DIN"
+rule "when to choose Baskerville"
     when
-//       Answer(subject == "likes condensed", answer == "no")
-//       Answer(subject == "got a lot of tables", answer == "no")
-       Answer(subject == "cried watching Terminator", answer == "no")
+       Answer("likes humanistic forms","no";)
     then
-       printResult("FF DIN");
+       printResult("Baskerville");
 end
 
-rule "when to choose OCR"
+rule "when to choose FF Scala"
     when
-//       Answer(subject == "likes condensed", answer == "no")
-//       Answer(subject == "got a lot of tables", answer == "no")
-       Answer(subject == "cried watching Terminator", answer == "yes")
+       Answer("preferred cheese","gouda";)
     then
-       printResult("OCR");
+       printResult("FF Scala");
 end
 
-rule "when to choose Letter Gothic"
+rule "when to choose Syntax"
     when
-//       Answer(subject == "likes condensed", answer == "no")
-       Answer(subject == "got a lot of tables", answer == "yes")
+       Answer("preferred cheese","emmental";)
     then
-       printResult("Letter Gothic");
+       printResult("Syntax");
 end
 
 rule "when to choose Univers"
     when
-       Answer(subject == "likes condensed", answer == "yes")
+       Answer("likes condensed","yes";)
     then
        printResult("Univers");
 end
 
-rule "when to choose Proforma"
+rule "when to choose Letter Gothic"
     when
-//       Answer(subject == "where in newspaper", answer == "text face")
-//       Answer(subject == "user is called boring", answer == "no")
-//       Answer(subject == "heavily used", answer == "no")
-       Answer(subject == "award winning", answer == "good")
+       Answer("got a lot of tables","yes";)
     then
-       printResult("Proforma");
+       printResult("Letter Gothic");
 end
 
-rule "when to choose Miller"
+rule "when to choose OCR"
     when
-//       Answer(subject == "where in newspaper", answer == "text face")
-//       Answer(subject == "user is called boring", answer == "no")
-       Answer(subject == "heavily used", answer == "yes")
+       Answer("cried watching Terminator","yes";)
     then
-       printResult("Miller");
+       printResult("OCR");
+end
+
+rule "when to choose FF DIN"
+    when
+       Answer("cried watching Terminator","no";)
+    then
+       printResult("FF DIN");
 end
 
 rule "when to choose Times"
     when
-//       Answer(subject == "where in newspaper", answer == "text face")
-       Answer(subject == "user is called boring", answer == "yes")
+       Answer("is called boring","yes";)
     then
        printResult("Times");
 end
 
-rule "when to choose Swift"
+rule "when to choose Miller"
     when
-       Answer(subject == "where in newspaper", answer == "combination")
-       Answer(subject == "thinks Spiekermann is right", answer == "no")
-       Answer(subject == "Netherlands is nice", answer == "yes")
+       Answer("heavily used","yes";)
     then
-       printResult("Swift");
+       printResult("Miller");
+end
+
+rule "when to choose Proforma"
+    when
+       Answer("award winning","good";)
+    then
+       printResult("Proforma");
 end
 
 rule "when to choose Arnhem"
     when
-    (and
-//       Answer(subject == "where in newspaper", answer == "text face")
-//       Answer(subject == "user is called boring", answer == "no")
-//       Answer(subject == "heavily used", answer == "no")
-       Answer(subject == "award winning", answer == "bad")
-    )
+       Answer("award winning","bad";)
     or
-    (and
-//       Answer(subject == "where in newspaper", answer == "combination")
-       Answer(subject == "thinks Spiekermann is right", answer == "yes")
-    )
+       Answer("thinks Spiekermann is right","yes";)
     then
        printResult("Arnhem");
 end
 
-rule "when to choose Interstate"
+rule "when to choose Swift"
     when
-//       Answer(subject == "where in newspaper", answer == "display")
-//       Answer(subject == "likes it traditional", answer == "yes")
-//       Answer(subject == "ok with swiss", answer == "no")
-       Answer(subject == "prefered age", answer == "new")
+       Answer("Netherlands is nice","yes";)
     then
-       printResult("Interstate");
-end
-
-rule "when to choose Helvetica"
-    when
-   (and
-//       Answer(subject == "where in newspaper", answer == "display")
-//       Answer(subject == "likes it traditional", answer == "yes")
-       Answer(subject == "ok with swiss", answer == "yes")
-   )
-    or
-   (and
-//       Answer(subject == "where in newspaper", answer == "display")
-//       Answer(subject == "likes it traditional", answer == "no")
-//       Answer(subject == "modern yet plainspoken", answer == "no")
-       Answer(subject == "pretend to live in the nineties", answer == "yes")
-   )
-    then
-       printResult("Helvetica");
-end
-
-rule "when to choose FF Meta"
-    when
-//       Answer(subject == "where in newspaper", answer == "display")
-//       Answer(subject == "likes it traditional", answer == "no")
-//       Answer(subject == "modern yet plainspoken", answer == "no")
-       Answer(subject == "pretend to live in the nineties", answer == "no")
-    then
-       printResult("FF Meta");
+       printResult("Swift");
 end
 
 rule "when to choose Gotham"
     when
-//       Answer(subject == "where in newspaper", answer == "display")
-//       Answer(subject == "likes it traditional", answer == "no")
-       Answer(subject == "modern yet plainspoken", answer == "yes")
+       Answer("modern yet plainspoken","yes";)
     then
        printResult("Gotham");
+end
+
+rule "when to choose FF Meta"
+    when
+       Answer("pretend to live in the nineties","no";)
+    then
+       printResult("FF Meta");
+end
+
+rule "when to choose Helvetica"
+    when
+       Answer("ok with swiss","yes";)
+    or
+       Answer("pretend to live in the nineties","yes";)
+    then
+       printResult("Helvetica");
+end
+
+rule "when to choose Interstate"
+    when
+       Answer("prefered age","new";)
+    then
+       printResult("Interstate");
+end
+
+rule "when to choose Franklin Gothic"
+    when
+       Answer("prefered age","old";)
+    then
+       printResult("Interstate");
 end
