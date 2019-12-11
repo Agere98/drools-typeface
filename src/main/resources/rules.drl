@@ -2,6 +2,9 @@ package pl.put.poznan;
 
 import pl.put.poznan.Main.Question
 import pl.put.poznan.Main.Answer
+import pl.put.poznan.Main.Init
+import pl.put.poznan.TypefaceGUI
+import pl.put.poznan.QuestionPanel
 import java.util.Scanner
 import java.util.Arrays
 import com.google.gson.Gson
@@ -10,8 +13,10 @@ import java.io.InputStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-function String askQuestion(Question q) {
-        System.out.println(q.content);
+function askQuestion(Question q) {
+		QuestionPanel panel = new QuestionPanel(TypefaceGUI.getFrame(), q);
+		panel.show();
+        /*System.out.println(q.content);
         for(String posan : q.possibleAnswers) System.out.println("-" + posan);
         Scanner s = new Scanner(System.in);
         String ans;
@@ -20,11 +25,13 @@ function String askQuestion(Question q) {
             ans = s.nextLine();
            //if(ans.equals("q")) drools.halt();
         } while(!Arrays.asList(q.possibleAnswers).contains(ans) && !ans.equals("q"));
-        return ans;
+        return ans;*/
 }
 
 function printResult(String typeface) {
-    System.out.println("Perfect typeface for you is " + typeface + ".");
+	ResultPanel panel = new ResultPanel(TypefaceGUI.getFrame(), typeface);
+	panel.show();
+    //System.out.println("Perfect typeface for you is " + typeface + ".");
 }
 
 rule "init"
@@ -43,11 +50,11 @@ rule "init"
 
 rule "ask about kind of project"
     when
+    	Init()
         $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
 end
 
 rule "ask if user is in doubt"
@@ -56,8 +63,8 @@ rule "ask if user is in doubt"
         not Answer(subject == $subj)
         Answer("kind of project", "book";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if champion in usability needed"
@@ -66,8 +73,8 @@ rule "ask if champion in usability needed"
         not Answer(subject == $subj)
         Answer("in doubt", "no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user loves Garamond"
@@ -76,8 +83,8 @@ rule "ask if user loves Garamond"
         not Answer(subject == $subj)
         Answer("champion in usability","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user would would want a larger eye"
@@ -86,8 +93,8 @@ rule "ask if user would would want a larger eye"
         not Answer(subject == $subj)
         Answer("loves Garamond","yes";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants as Sans Serif"
@@ -96,8 +103,8 @@ rule "ask if user wants as Sans Serif"
         not Answer(subject == $subj)
         Answer("loves Garamond","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask about user opinion of Eric Gill"
@@ -106,8 +113,8 @@ rule "ask about user opinion of Eric Gill"
         not Answer(subject == $subj)
         Answer("wants sans serif","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes humanistic forms"
@@ -116,8 +123,8 @@ rule "ask if user likes humanistic forms"
         not Answer(subject == $subj)
         Answer("opinion of Eric Gill","bad";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask what cheese user preferes"
@@ -126,8 +133,8 @@ rule "ask what cheese user preferes"
         not Answer(subject == $subj)
         Answer("likes humanistic forms","yes";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes something condensed"
@@ -136,8 +143,8 @@ rule "ask if user likes something condensed"
         not Answer(subject == $subj)
         Answer("kind of project","infographic";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user got a lot of tables"
@@ -146,8 +153,8 @@ rule "ask if user got a lot of tables"
         not Answer(subject == $subj)
         Answer("likes condensed","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user cried watching Terminator"
@@ -156,8 +163,8 @@ rule "ask if user cried watching Terminator"
         not Answer(subject == $subj)
         Answer("got a lot of tables","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask where user is going to use typerface"
@@ -166,8 +173,8 @@ rule "ask where user is going to use typerface"
         not Answer(subject == $subj)
         Answer("kind of project","newspaper";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user is called boring"
@@ -176,8 +183,8 @@ rule "ask if user is called boring"
         not Answer(subject == $subj)
         Answer("where in newspaper","text face";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something heavily used"
@@ -186,8 +193,8 @@ rule "ask if user wants something heavily used"
         not Answer(subject == $subj)
         Answer("is called boring","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something award winning"
@@ -196,8 +203,8 @@ rule "ask if user wants something award winning"
         not Answer(subject == $subj)
         Answer("heavily used","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if Mr. Spiekermann is mostly right"
@@ -207,8 +214,8 @@ rule "ask if Mr. Spiekermann is mostly right"
         not Answer(subject == $subj)
         Answer("where in newspaper","combination";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if Netherlands is nice"
@@ -218,8 +225,8 @@ rule "ask if Netherlands is nice"
         not Answer(subject == $subj)
         Answer("thinks Spierkermann is right","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes it traditional"
@@ -229,8 +236,8 @@ rule "ask if user likes it traditional"
         not Answer(subject == $subj)
         Answer("where in newspaper","display";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if swiss is okay"
@@ -239,8 +246,8 @@ rule "ask if swiss is okay"
         not Answer(subject == $subj)
         Answer("likes traditional","yes";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask about preferred age"
@@ -249,8 +256,8 @@ rule "ask about preferred age"
         not Answer(subject == $subj)
         Answer("ok with swiss","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something modern, yet planspoken"
@@ -259,8 +266,8 @@ rule "ask if user wants something modern, yet planspoken"
         not Answer(subject == $subj)
         Answer("likes it traditional","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user pretends to live in nineties"
@@ -269,8 +276,8 @@ rule "ask if user pretends to live in nineties"
         not Answer(subject == $subj)
         Answer("modern yet plainspoken","no";)
     then
-        String ans = askQuestion($q);
-        insert(new Answer($subj, ans));
+        askQuestion($q);
+        //insert(new Answer($subj, ans));
 end
 
 rule "when to choose Caslon"

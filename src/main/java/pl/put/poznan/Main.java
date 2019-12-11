@@ -13,10 +13,14 @@ import java.io.FileNotFoundException;
 public class Main {
 
     public static void main(final String[] args) throws FileNotFoundException {
+         
         KieServices kieServices = KieServices.Factory.get();
         KieContainer kContainer = kieServices.getKieClasspathContainer();
         KieBase kieBase = kContainer.getKieBase();
         KieSession session = kieBase.newKieSession();
+
+        TypefaceGUI.startGUI(session);
+      
         session.addEventListener( new DebugRuleRuntimeEventListener());
         session.addEventListener( new DebugAgendaEventListener());
         session.fireAllRules();
@@ -53,5 +57,5 @@ public class Main {
             answer = ans;
         }
     }
-
+    public static class Init {}
 }
