@@ -142,7 +142,7 @@ rule "ask if user cried watching Terminator"
         askQuestion($q);
 end
 
-rule "say flawchart is looking hot"
+rule "say flowchart is looking hot"
     when
         $q : Question($subj : subject == "hot flowchart")
         not Answer(subject == $subj)
