@@ -142,6 +142,15 @@ rule "ask if user cried watching Terminator"
         askQuestion($q);
 end
 
+rule "say flawchart is looking hot"
+    when
+        $q : Question($subj : subject == "hot flowchart")
+        not Answer(subject == $subj)
+        Answer("cried watching Terminator","no";)
+    then
+        askQuestion($q);
+end
+
 rule "ask where user is going to use typerface"
     when
         $q : Question($subj : subject == "where in newspaper")
@@ -192,6 +201,14 @@ rule "ask if Netherlands is nice"
         $q : Question($subj : subject == "Netherlands is nice")
         not Answer(subject == $subj)
         Answer("thinks Spiekermann is right","no";)
+    then
+        askQuestion($q);
+end
+
+rule "blame user"
+    when
+        $q : Question($subj : subject == "get out")
+        Answer("Netherlands is nice","no";)
     then
         askQuestion($q);
 end
@@ -327,7 +344,7 @@ end
 
 rule "when to choose FF DIN"
     when
-       Answer("cried watching Terminator","no";)
+       Answer("hot flowchart","yes";)
     then
        printResult("FF DIN");
 end

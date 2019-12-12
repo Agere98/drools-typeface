@@ -97,6 +97,13 @@
     ]
   },
   {
+    "content": "I must say that this flowchart is looking hot.",
+    "subject": "hot flowchart",
+    "possibleAnswers": [
+      "yes"
+    ]
+  },
+  {
     "content": "Where are you going to use typeface?",
     "subject": "where in newspaper",
     "possibleAnswers": [
@@ -147,7 +154,7 @@
   },
   {
     "content": "Get out of my program",
-    "subject": "",
+    "subject": "get out",
     "possibleAnswers": [
     ]
   },
@@ -185,6 +192,14 @@
   {
     "content": "Something modern, yet plainspoken?",
     "subject": "modern yet plainspoken",
+    "possibleAnswers": [
+      "yes",
+      "no"
+    ]
+  },
+  {
+    "content": "Not afraid to be asked if you live in the nineties?",
+    "subject": "pretend to live in the nineties",
     "possibleAnswers": [
       "yes",
       "no"
