@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import org.kie.api.runtime.KieSession;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class TypefaceGUI {
 	
 	private static JFrame frame;
@@ -14,10 +17,16 @@ public class TypefaceGUI {
         frame.pack();
         frame.setSize(688, 400);
         frame.setResizable(false);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                session.dispose();
+            }
+        });
         
         StartPanel panel = new StartPanel(frame);
         panel.show();
-        
+
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 	

@@ -2,10 +2,8 @@ package pl.put.poznan;
 
 import pl.put.poznan.Main.Question
 import pl.put.poznan.Main.Answer
-import pl.put.poznan.Main.Init
 import pl.put.poznan.TypefaceGUI
 import pl.put.poznan.QuestionPanel
-import java.util.Scanner
 import java.util.Arrays
 import com.google.gson.Gson
 import com.google.gson.stream.JsonReader
@@ -14,24 +12,13 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 function askQuestion(Question q) {
-		QuestionPanel panel = new QuestionPanel(TypefaceGUI.getFrame(), q);
-		panel.show();
-        /*System.out.println(q.content);
-        for(String posan : q.possibleAnswers) System.out.println("-" + posan);
-        Scanner s = new Scanner(System.in);
-        String ans;
-        do {
-            System.out.println("Type one of the answers listed above:");
-            ans = s.nextLine();
-           //if(ans.equals("q")) drools.halt();
-        } while(!Arrays.asList(q.possibleAnswers).contains(ans) && !ans.equals("q"));
-        return ans;*/
+	QuestionPanel panel = new QuestionPanel(TypefaceGUI.getFrame(), q);
+	panel.show();
 }
 
 function printResult(String typeface) {
 	ResultPanel panel = new ResultPanel(TypefaceGUI.getFrame(), typeface);
 	panel.show();
-    //System.out.println("Perfect typeface for you is " + typeface + ".");
 }
 
 rule "init"
@@ -50,7 +37,6 @@ rule "init"
 
 rule "ask about kind of project"
     when
-    	Init()
         $q : Question($subj : subject == "kind of project")
         not Answer(subject == $subj)
     then
@@ -64,7 +50,6 @@ rule "ask if user is in doubt"
         Answer("kind of project", "book";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if champion in usability needed"
@@ -74,7 +59,6 @@ rule "ask if champion in usability needed"
         Answer("in doubt", "no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user loves Garamond"
@@ -84,7 +68,6 @@ rule "ask if user loves Garamond"
         Answer("champion in usability","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user would would want a larger eye"
@@ -94,7 +77,6 @@ rule "ask if user would would want a larger eye"
         Answer("loves Garamond","yes";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants as Sans Serif"
@@ -104,7 +86,6 @@ rule "ask if user wants as Sans Serif"
         Answer("loves Garamond","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask about user opinion of Eric Gill"
@@ -114,7 +95,6 @@ rule "ask about user opinion of Eric Gill"
         Answer("wants sans serif","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes humanistic forms"
@@ -124,7 +104,6 @@ rule "ask if user likes humanistic forms"
         Answer("opinion of Eric Gill","bad";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask what cheese user preferes"
@@ -134,7 +113,6 @@ rule "ask what cheese user preferes"
         Answer("likes humanistic forms","yes";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes something condensed"
@@ -144,7 +122,6 @@ rule "ask if user likes something condensed"
         Answer("kind of project","infographic";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user got a lot of tables"
@@ -154,7 +131,6 @@ rule "ask if user got a lot of tables"
         Answer("likes condensed","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user cried watching Terminator"
@@ -164,7 +140,6 @@ rule "ask if user cried watching Terminator"
         Answer("got a lot of tables","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask where user is going to use typerface"
@@ -174,7 +149,6 @@ rule "ask where user is going to use typerface"
         Answer("kind of project","newspaper";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user is called boring"
@@ -184,7 +158,6 @@ rule "ask if user is called boring"
         Answer("where in newspaper","text face";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something heavily used"
@@ -194,7 +167,6 @@ rule "ask if user wants something heavily used"
         Answer("is called boring","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something award winning"
@@ -204,7 +176,6 @@ rule "ask if user wants something award winning"
         Answer("heavily used","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if Mr. Spiekermann is mostly right"
@@ -214,7 +185,6 @@ rule "ask if Mr. Spiekermann is mostly right"
         Answer("where in newspaper","combination";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if Netherlands is nice"
@@ -224,7 +194,6 @@ rule "ask if Netherlands is nice"
         Answer("thinks Spierkermann is right","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user likes it traditional"
@@ -234,7 +203,6 @@ rule "ask if user likes it traditional"
         Answer("where in newspaper","display";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if swiss is okay"
@@ -244,7 +212,6 @@ rule "ask if swiss is okay"
         Answer("likes traditional","yes";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask about preferred age"
@@ -254,7 +221,6 @@ rule "ask about preferred age"
         Answer("ok with swiss","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user wants something modern, yet planspoken"
@@ -264,7 +230,6 @@ rule "ask if user wants something modern, yet planspoken"
         Answer("likes it traditional","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "ask if user pretends to live in nineties"
@@ -274,7 +239,6 @@ rule "ask if user pretends to live in nineties"
         Answer("modern yet plainspoken","no";)
     then
         askQuestion($q);
-        //insert(new Answer($subj, ans));
 end
 
 rule "when to choose Caslon"
@@ -439,5 +403,5 @@ rule "when to choose Franklin Gothic"
     when
        Answer("prefered age","old";)
     then
-       printResult("Interstate");
+       printResult("Franklin Gothic");
 end

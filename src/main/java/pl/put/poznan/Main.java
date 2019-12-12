@@ -23,8 +23,7 @@ public class Main {
       
         session.addEventListener( new DebugRuleRuntimeEventListener());
         session.addEventListener( new DebugAgendaEventListener());
-        session.fireAllRules();
-        session.dispose();
+//        session.dispose();
     }
 
     public static class Question {
@@ -57,5 +56,4 @@ public class Main {
             answer = ans;
         }
     }
-    public static class Init {}
 }

@@ -9,8 +9,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import pl.put.poznan.Main.Init;
-
 public class StartPanel implements ActionListener {
 
 	private JFrame parent;
@@ -47,7 +45,7 @@ public class StartPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		if (action == "start") {
-			TypefaceGUI.getSession().insert(new Init());
+			TypefaceGUI.getSession().fireAllRules();
 		}
 	}
 }

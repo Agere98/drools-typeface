@@ -1,5 +1,6 @@
 package pl.put.poznan;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,17 +21,30 @@ public class QuestionPanel implements ActionListener {
 		this.question = question;
 		this.parent = parent;
 		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        GroupLayout groupLayout = new GroupLayout(panel);
+		panel.setLayout(groupLayout);
+		groupLayout.setAutoCreateGaps(true);
+		groupLayout.setAutoCreateContainerGaps(true);
+        GroupLayout.ParallelGroup parallel = groupLayout.createParallelGroup();
+		GroupLayout.SequentialGroup sequential = groupLayout.createSequentialGroup();
+        groupLayout.setHorizontalGroup(parallel);
+		groupLayout.setVerticalGroup(sequential);
+
 
 		JLabel questionLabel = new JLabel(question.content);
-		panel.add(questionLabel);
+		parallel.addComponent(questionLabel);
+		sequential.addComponent(questionLabel);
+//		panel.add(questionLabel);
 
 		ButtonGroup buttons = new ButtonGroup();
 		for (String answer : question.possibleAnswers) {
 			JRadioButton button = new JRadioButton(answer);
 			button.setActionCommand(answer);
 			button.addActionListener(this);
-			panel.add(button);
+			parallel.addGroup(groupLayout.createSequentialGroup().addComponent(button));
+//			panel.add(button);
+			parallel.addComponent(button);
+			sequential.addComponent(button);
 			buttons.add(button);
 		}
 
@@ -38,7 +52,8 @@ public class QuestionPanel implements ActionListener {
 		nextButton.setActionCommand("_next_");
 		nextButton.addActionListener(this);
 		nextButton.setEnabled(false);
-		panel.add(nextButton);
+		parallel.addComponent(nextButton);
+		sequential.addComponent(nextButton);
 	}
 
 	public void show() {
@@ -52,6 +67,7 @@ public class QuestionPanel implements ActionListener {
 		String action = e.getActionCommand();
 		if (action == "_next_") {
 			TypefaceGUI.getSession().insert(new Answer(question.getSubject(), answer));
+			TypefaceGUI.getSession().fireAllRules();
 		}
 		else {
 			answer = action;
