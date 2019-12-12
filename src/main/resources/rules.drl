@@ -182,7 +182,7 @@ rule "ask if Mr. Spiekermann is mostly right"
     when
         $q : Question($subj : subject == "thinks Spiekermann is right")
         not Answer(subject == $subj)
-        Answer("where in newspaper","combination";)
+        Answer("where in newspaper","combined";)
     then
         askQuestion($q);
 end
@@ -191,7 +191,7 @@ rule "ask if Netherlands is nice"
     when
         $q : Question($subj : subject == "Netherlands is nice")
         not Answer(subject == $subj)
-        Answer("thinks Spierkermann is right","no";)
+        Answer("thinks Spiekermann is right","no";)
     then
         askQuestion($q);
 end
