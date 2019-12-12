@@ -9,15 +9,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class StartPanel implements ActionListener {
-
-	private JFrame parent;
-	private JPanel panel;
+public class StartPanel extends PanelBase implements ActionListener {
 
 	public StartPanel(JFrame parent) {
-		this.parent = parent;
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		super(parent);
 
 		BufferedImage image;
 		try {
@@ -33,12 +28,6 @@ public class StartPanel implements ActionListener {
 		startButton.setActionCommand("start");
 		startButton.addActionListener(this);
 		panel.add(startButton);
-	}
-
-	public void show() {
-		parent.setContentPane(panel);
-		parent.validate();
-		parent.repaint();
 	}
 
 	@Override
