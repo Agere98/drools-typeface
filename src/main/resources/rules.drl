@@ -209,7 +209,7 @@ rule "ask if swiss is okay"
     when
         $q : Question($subj : subject == "ok with swiss")
         not Answer(subject == $subj)
-        Answer("likes traditional","yes";)
+        Answer("likes it traditional","yes";)
     then
         askQuestion($q);
 end
@@ -225,7 +225,7 @@ end
 
 rule "ask if user wants something modern, yet planspoken"
     when
-        $q : Question($subj : subject == "moder yet plainspoken")
+        $q : Question($subj : subject == "modern yet plainspoken")
         not Answer(subject == $subj)
         Answer("likes it traditional","no";)
     then
@@ -234,7 +234,7 @@ end
 
 rule "ask if user pretends to live in nineties"
     when
-        $q : Question($subj : subject == "pretend to live in nineties")
+        $q : Question($subj : subject == "pretend to live in the nineties")
         not Answer(subject == $subj)
         Answer("modern yet plainspoken","no";)
     then
@@ -394,14 +394,14 @@ end
 
 rule "when to choose Interstate"
     when
-       Answer("prefered age","new";)
+       Answer("preferred age","new";)
     then
        printResult("Interstate");
 end
 
 rule "when to choose Franklin Gothic"
     when
-       Answer("prefered age","old";)
+       Answer("preferred age","old";)
     then
        printResult("Franklin Gothic");
 end
